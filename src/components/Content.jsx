@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Formular from './addSiteFormular/addSiteFormular';
-
+import SiteList from './siteSearchContainer/siteList';
 
 
 
@@ -10,7 +10,7 @@ import Formular from './addSiteFormular/addSiteFormular';
           return (
             <div className="tapp__content content">
                 <Formular/>
-
+                <SiteList/>
             </div>
           );
         }
