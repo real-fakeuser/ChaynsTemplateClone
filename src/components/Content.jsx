@@ -1,6 +1,6 @@
 import React from 'react';
 
-import addSiteFormular from './addSiteFormular/addSiteFormular';
+import Formular from './addSiteFormular/addSiteFormular';
 
 
 
@@ -9,7 +9,8 @@ import addSiteFormular from './addSiteFormular/addSiteFormular';
         render() {
           return (
             <div className="tapp__content content">
-                <addSiteFormular/>
+                <Formular/>
+
             </div>
           );
         }
