@@ -2,8 +2,8 @@ import React from 'react';
 import { Accordion } from 'chayns-components';
 import SearchModule from '../searchBar/Search';
 import getJSONObject from '../../utils/getJson';
-import ListItem from './ListItem';
-import './SearchList.scss';
+import ListItem from '../ListItem/ListItem';
+import './SearchContainer.scss';
 
 export default class SearchContainer extends React.Component {
     constructor() {

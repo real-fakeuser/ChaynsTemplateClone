@@ -1,5 +1,15 @@
-import React from 'react';
-import './listItem.scss';
+import React from 'react'
+import PropTypes from 'prop-types'
+import './listItem.scss'
+
+const propTypes={
+            siteId: PropTypes.string.isRequired,
+            locationId: PropTypes.number.isRequired,
+            appstoreName: PropTypes.string.isRequired
+};
+
+const defaultProps={
+};
 
 export default class ListItem extends React.Component {
     constructor(props) {
@@ -9,7 +19,8 @@ export default class ListItem extends React.Component {
 
     render = () => {
         const backImg = {
-            backgroundImage: `url(https://sub60.tobit.com/l/${this.props.locationId})`
+            backgroundImage: `url(https://sub60.tobit.com/l/${this.props.locationId})`,
+            backgroundSize: `40px 40px`
         }
         return (
             <div className="ListItem ListItem--clickable listLinks" >
@@ -28,3 +39,6 @@ export default class ListItem extends React.Component {
         );
     }
 }
+
+ListItem.propTypes = propTypes;
+ListItem.defaultProps = defaultProps;
