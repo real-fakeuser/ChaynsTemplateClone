@@ -22,7 +22,7 @@ export default class Formular extends React.Component {
 
     render() {
         return (
-            <Accordion defaultOpened head={"Site hinzufügen"}>
+            <Accordion head={"Site hinzufügen"}>
                 <div className="accordion__content">
                     <Input placeholder="Name" className="form" value={this.state.formName} onChange={(val) => { this.setState({formName: val}); this._checkFormulaInput();}} />
                     <Input placeholder="E-Mail" className="form" value={this.state.formEmail}  onChange={(val) => { this.setState({formEmail: val}); this._checkFormulaInput();}}/>
