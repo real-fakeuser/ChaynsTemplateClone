@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
-import { Input } from 'chayns-components';
-import { Button, ChooseButton } from 'chayns-components';
-import { Accordion } from 'chayns-components';
-import { TextArea } from 'chayns-components';
-import './Formular.scss';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Input } from 'chayns-components'
+import { Button, ChooseButton } from 'chayns-components'
+import { Accordion } from 'chayns-components'
+import { TextArea } from 'chayns-components'
+import './Formular.scss'
 
 const propTypes={
 };
@@ -32,30 +33,29 @@ export default class Formular extends React.Component {
                     <Input
                         placeholder="Name"
                         className="form"
-                        value={this.state.formName}
                         onChange={(val) => {
-                            this.setState({ formName: val }),
-                                this._checkFormulaInput()
+                            this.setState({ formName: val })
                         }
                         }
                     />
                     <Input
                         placeholder="E-Mail"
                         className="form"
-                        value={this.state.formEmail}
+                        regExp={'^(([^<>()\\[\\]\\\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'}
                         onChange={(val) => {
-                            this.setState({ formEmail: val }),
-                                this._checkFormulaInput()
+                            if (val != null){
+                            this.setState({ formEmail: val })
+                            } else {
+                                this.setState({ formEmail: "" })
+                            }
                         }
                         }
                     />
                     <Input
                         placeholder="Adresse"
                         className="form"
-                        value={this.state.formAdr}
                         onChange={(val) => {
-                            this.setState({ formAdr: val }),
-                                this._checkFormulaInput()
+                            this.setState({ formAdr: val })
                         }
                         }
                     />
@@ -63,20 +63,15 @@ export default class Formular extends React.Component {
                         autogrow
                         placeholder="Kommentar"
                         className="form"
-                        value={this.state.formCom}
                         onChange={(val) => {
-                            this.setState({ formCom: val }),
-                                this._checkFormulaInput();
-                        }
+                            this.setState({ formCom: val })                        }
                         }
                     />
                     <div id="sndDiv">
                         <Button
-                            disabled={this.state.isDisabled}
+                            disabled={this.state.formName === "" || this.state.formAdr === "" || this.state.formEmail === ""}
                             onClick={(e) => {
-                                this._checkFormulaInput(() => {
                                     this.sendIcom();
-                                })
                             }
                             }
                         >
@@ -86,11 +81,6 @@ export default class Formular extends React.Component {
                 </div>
             </Accordion>
         );
-    }
-
-    eMailValid = (email) => {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
     }
 
     sendIcom() {
@@ -117,16 +107,7 @@ export default class Formular extends React.Component {
         }
     }
 
-    _checkFormulaInput(callback) {
-        if (this.state.formName.length > 0 && this.state.formAdr.length > 0 && this.state.formEmail.length > 0 && this.eMailValid(this.state.formEmail)) {
-            this.setState({ isDisabled: false });
-            if (callback != null) {
-                callback();
-            }
-        } else {
-            this.setState({ isDisabled: true });
-        }
-    }
+
 }
 
 
