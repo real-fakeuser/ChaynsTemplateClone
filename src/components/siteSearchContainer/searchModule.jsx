@@ -20,7 +20,12 @@ export default class searchModule extends React.Component {
         return (
             <div className="flex-container">
                 <div className="Suche Suche--accordion searchbar">
-                    <Input placeholder="Suche" className="input searchIn" value={this.state.searchString} onChange={(val) => { this.setState({ searchString: val }, () => { this.keyUpSearch() }) }} />
+                    <Input
+                        placeholder="Suche"
+                        className="input searchIn"
+                        value={this.state.searchString}
+                        onChange={(val) => { this.setState({ searchString: val }, () => { this.keyUpSearch() }) }}
+                    />
                     <i className="fa fa-search searchIcon" aria-hidden="true" id="faSearchIcon"></i>
                 </div>
             </div>
