@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { PropTypes } from 'react'
 import { Input } from 'chayns-components';
 import { Button, ChooseButton } from 'chayns-components';
 import { Accordion } from 'chayns-components';
 import { TextArea } from 'chayns-components';
+import './Formular.scss';
 
-import './Formular.scss'
+const propTypes={
+};
+
+const defaultProps={
+};
 
 
 export default class Formular extends React.Component {
     constructor() {
         super();
-
+        
         this.state = {
             formName: "",
             formAdr: "",
@@ -72,7 +77,6 @@ export default class Formular extends React.Component {
                                 this._checkFormulaInput(() => {
                                     this.sendIcom();
                                 })
-                                //this.sendIcom()
                             }
                             }
                         >
@@ -126,4 +130,6 @@ export default class Formular extends React.Component {
 }
 
 
+Formular.propTypes = propTypes;
+Formular.defaultProps = defaultProps;
 

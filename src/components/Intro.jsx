@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Intro.scss';
 import { HEADLINE, DESCRIPTION } from '../constants/text';
 
 const Intro = () => (

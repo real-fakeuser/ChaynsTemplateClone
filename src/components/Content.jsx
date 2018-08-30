@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Content.scss';
 import Formular from './SiteFormular/Formular';
 import SearchContainer from './SearchContainer/SearchList';
 
