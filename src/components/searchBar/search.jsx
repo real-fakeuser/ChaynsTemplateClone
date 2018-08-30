@@ -37,7 +37,7 @@ export default class searchModule extends React.Component {
 
     keyUpSearch = () => {
         clearTimeout(this.timerID);
-        if (this.state.searchString.length > 2) {
+        if (this.state.searchString.length > 0) {
             this.timerID = setTimeout(() => {
                 this.props.callBack(this.state.searchString);
             }, 500);
