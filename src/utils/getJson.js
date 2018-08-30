@@ -1,4 +1,4 @@
-const getJSONObject = (keyWord,skip,take) => {    
+const getJSONObject = (keyWord, skip, take) => {
     return new Promise((resolve, reject) => {
         fetch(`https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=${keyWord}&Skip=${skip}&Take=${take}`)
             .then(function (response) {

@@ -12,7 +12,6 @@ export default class searchModule extends React.Component {
             lastInputTime: 0,
             searchString: ""
         }
-
         this.timerID = 0;
     }
 
@@ -24,7 +23,11 @@ export default class searchModule extends React.Component {
                         placeholder="Suche"
                         className="input searchIn"
                         value={this.state.searchString}
-                        onChange={(val) => { this.setState({ searchString: val }, () => { this.keyUpSearch() }) }}
+                        onChange={(val) => {
+                            this.setState({ searchString: val }, () => {
+                                this.keyUpSearch()
+                            })
+                        }}
                     />
                     <i className="fa fa-search searchIcon" aria-hidden="true" id="faSearchIcon"></i>
                 </div>
@@ -34,16 +37,11 @@ export default class searchModule extends React.Component {
 
     keyUpSearch = () => {
         clearTimeout(this.timerID);
-        this.timerID = setTimeout(() => {
-            this.props.callBack(this.state.searchString);
-        }, 500);
+        if (this.state.searchString.length > 2) {
+            this.timerID = setTimeout(() => {
+                this.props.callBack(this.state.searchString);
+            }, 500);
+        }
 
     }
-
-
-
-
-
-
-
 }

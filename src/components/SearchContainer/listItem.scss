@@ -1,4 +1,11 @@
-.ListItem {
+  .ListItem__Title--headline {
+    height: 23px;
+    white-space:nowrap;
+    overflow:hidden;
+    width: 100%;
+    text-overflow:ellipsis;
+  }
+  .ListItem {
     width: 100%;
     border-bottom: 1px solid #554f4f;
   }
@@ -22,6 +29,8 @@
   .ListItem .ListItem__head .ListItem__Image {
     height: 40px;
     width: 40px;
+    min-height: 40px;
+    min-width: 40px;
     margin-right: 10px;
   }
   .ListItem .ListItem__head .ListItem__Image img {
