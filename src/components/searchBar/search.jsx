@@ -12,7 +12,6 @@ export default class searchModule extends React.Component {
             lastInputTime: 0,
             searchString: ""
         }
-
         this.timerID = 0;
     }
 
@@ -34,16 +33,11 @@ export default class searchModule extends React.Component {
 
     keyUpSearch = () => {
         clearTimeout(this.timerID);
-        this.timerID = setTimeout(() => {
-            this.props.callBack(this.state.searchString);
-        }, 500);
+        if (this.state.searchString.length > 2) {
+            this.timerID = setTimeout(() => {
+                this.props.callBack(this.state.searchString);
+            }, 500);
+        }
 
     }
-
-
-
-
-
-
-
 }
