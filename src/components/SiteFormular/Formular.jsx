@@ -4,7 +4,7 @@ import { Button, ChooseButton } from 'chayns-components';
 import { Accordion } from 'chayns-components';
 import { TextArea } from 'chayns-components';
 
-import './formular.scss'
+import './Formular.scss'
 
 
 export default class Formular extends React.Component {
@@ -29,7 +29,7 @@ export default class Formular extends React.Component {
                     <Input placeholder="Adresse" className="form" value={this.state.formAdr}  onChange={(val) => { this.setState({formAdr: val}); this._checkFormulaInput();}}/>
                     <TextArea autogrow placeholder="Kommentar" className="form"  value={this.state.formCom} onChange={(val) => { this.setState({formCom: val}); this._checkFormulaInput();}}/>
                     <div id="sndDiv">
-                        <Button disabled={this.state.isDisabled} onClick={(e) => { this.sendIcom() }} >Senden</Button>
+                        <Button disabled={this.state.isDisabled} onClick={(e) => { this.sendIcom() }} >Daten Senden</Button>
                     </div>
                 </div>
             </Accordion>

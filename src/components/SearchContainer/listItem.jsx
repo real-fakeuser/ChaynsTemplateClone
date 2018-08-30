@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './listItem.scss';
 
 
 export default class ListItem extends React.Component {
@@ -10,9 +10,7 @@ export default class ListItem extends React.Component {
 
     render = () => {
         const backImg = {
-            backgroundImage: `url(https://sub60.tobit.com/l/${this.props.locationId})`,
-            backgroundSize: `40px 40px`
-
+            backgroundImage: `url(https://sub60.tobit.com/l/${this.props.locationId})`
         }
         return (
             <div className="ListItem ListItem--clickable listLinks" >

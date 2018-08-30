@@ -1,13 +1,11 @@
 .searchbar{
- 
-    font-size: 14px;
+     font-size: 14px;
     line-height: 26px;
-
 }
 
 .searchIcon{
     position: absolute;
-    top: 5px;
+    top: 7.5px;
     right: 10px;
     color: ccc;
     font-size: 12px;
@@ -15,17 +13,12 @@
 
 .searchIn{
     position: absolute;
-    top: -8px;
+    top: 0px;
     right: 7.5px;
-
 }
 
-.ShowMoreLink{
-    padding: 5px;
-}
 
 #faSearchIcon{
-  color: ccc;
+  color: rgb(173, 173, 173);
     font-size: 12px;
 }
-
