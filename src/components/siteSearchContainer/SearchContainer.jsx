@@ -3,26 +3,33 @@ import { Accordion } from 'chayns-components';
 import SearchModule from './searchModule';
 import getJSONObject from '../../utils/getJson';
 import ListItem from './listItem';
+import './SearchContainer.scss';
 
 export default class SearchContainer extends React.Component {
     constructor() {
         super();
 
         this.state = {
-            formName: "",
-            formAdr: "",
-            formEmail: "",
-            formCom: "",
-            isDisabled: true,
-            listItems: []
-        }
+            listItems: [],
+            shouldClearList: true
 
+        }
+        this.searchString = '';
+        this.listLength = 0;
+        this.loadData('Tobit', 0, 10);
     }
 
     loadData(key, skip, take) {
         chayns.showWaitCursor(" ");
+        this.searchString=key;
+        this.listLength=skip;
         getJSONObject(key, skip, take).then((json) => {
             let items = [];
+            if (!this.state.shouldClearList){
+                items = this.state.listItems;
+                this.setState({shouldClearList: true});
+            }
+            
             for(let i=0; i < json.Data.length; i++){
                 items.push({siteId: json.Data[i].siteId,locationId: json.Data[i].locationId,appstoreName: json.Data[i].appstoreName})
             }
@@ -46,6 +53,9 @@ export default class SearchContainer extends React.Component {
                             />
                         ))                        
                     }
+                </div>
+                <div id="right">
+                <a id="showMoreBtn"href="#" onClick={ () => {this.setState({shouldClearList: false},() => {this.loadData(this.searchString,this.listLength+=10,10)})}} >Mehr anzeigen</a>
                 </div>
             </Accordion>
         );
