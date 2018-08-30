@@ -1,8 +1,8 @@
 import React from 'react';
 import { Accordion } from 'chayns-components';
-import SearchModule from '../searchBar/search';
+import SearchModule from '../searchBar/Search';
 import getJSONObject from '../../utils/getJson';
-import ListItem from './listItem';
+import ListItem from './ListItem';
 import './SearchList.scss';
 
 export default class SearchContainer extends React.Component {
@@ -37,7 +37,7 @@ export default class SearchContainer extends React.Component {
                 this.setState({ listItems: items });
             } else {
                 chayns.dialog.alert('Information', 'Keine neuen Ergebnisse gefunden')
-                    .then(function (data) {});
+                    .then(function (data) { });
             }
             chayns.hideWaitCursor();
         });
@@ -45,7 +45,17 @@ export default class SearchContainer extends React.Component {
 
     render() {
         return (
-            <Accordion defaultOpened head={'Suchergebnisse'} className='accordion--fixed' right={<SearchModule callBack={(val) => { this.loadData(val, 0, 10) }} />}>
+            <Accordion
+                defaultOpened
+                head={'Suchergebnisse'}
+                className='accordion--fixed'
+                right={<SearchModule
+                    callBack={(val) => {
+                        this.loadData(val, 0, 10)
+                    }}
+                />
+                }
+            >
                 <div className="accordion__content">
                     {
                         this.state.listItems && this.state.listItems.map(({ siteId, locationId, appstoreName }) => (
@@ -59,7 +69,17 @@ export default class SearchContainer extends React.Component {
                     }
                 </div>
                 <div id="right">
-                    <a id="showMoreBtn" href="#" onClick={() => { this.setState({ shouldClearList: false }, () => { this.loadData(this.searchString, this.listLength += 10, 10) }) }} >Mehr anzeigen</a>
+                    <a
+                        id="showMoreBtn"
+                        href="#"
+                        onClick={() => {
+                            this.setState({ shouldClearList: false }, () => {
+                                this.loadData(this.searchString, this.listLength += 10, 10)
+                            })
+                        }}
+                    >
+                        Mehr anzeigen
+                            </a>
                 </div>
             </Accordion>
         );
