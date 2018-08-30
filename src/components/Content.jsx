@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Formular from './addSiteFormular/Formular';
-import SearchContainer from './siteSearchContainer/SearchContainer';
+import Formular from './SiteFormular/Formular';
+import SearchContainer from './SearchContainer/SearchList';
 
     export default class content extends React.Component {
         render() {
