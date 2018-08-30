@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from 'chayns-components';
-import './searchModule.scss';
+import './search.scss';
 export default class searchModule extends React.Component {
     constructor(props) {
         super();
