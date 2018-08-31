@@ -35,12 +35,13 @@ export default class SearchContainer extends React.Component {
                     items.push({ siteId: json.Data[i].siteId, locationId: json.Data[i].locationId, appstoreName: json.Data[i].appstoreName })
                 }
                 this.setState({ listItems: items });
-            } else if (skip == 0) {
+            } else if (skip > 0) {
+                this.setState({ listLength: (this.listLength - skip) });
                 chayns.dialog.alert('Information', 'Es sind keine weiteren Ergebnisse verfügbar')
                     .then(function (data) { });
             } else {
-                chayns.dialog.alert('Information', 'Wir konnten nichts unter deinem Suchbegriff finden. Versuche einen anderen Suchbegriff.')
-                .then(function (data) { });
+                this.loadData('Tobit', 0, 10);
+
             }
             chayns.hideWaitCursor();
         });
