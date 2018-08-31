@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import './listItem.scss'
 
 const propTypes={
-            siteId: PropTypes.string.isRequired,
-            locationId: PropTypes.number.isRequired,
-            appstoreName: PropTypes.string.isRequired
+            siteId: PropTypes.string,
+            locationId: PropTypes.number,
+            appstoreName: PropTypes.string
 };
 
 const defaultProps={
