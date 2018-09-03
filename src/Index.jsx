@@ -19,6 +19,7 @@ async function init() {
     if (__DEV__ || __STAGING__) {
         storeMiddleware.push(require('redux-logger').default);
     }
+    console.log(storeMiddleware);
 
     const store = createStore(
         rootReducer,
