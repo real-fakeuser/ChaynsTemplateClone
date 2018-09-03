@@ -1,3 +1,4 @@
+import { List } from 'immutable';
 /*export default userReducers = (state=[], action) => {
     switch(action.type) {
         case "CHANGE_NAME": {
@@ -14,23 +15,17 @@
 */
 
 
-const initialState = {
-    name: "",
-    age: null 
-}
+const initialState = List();
+
 const siteList = (state = initialState, action) => {
-    let tState = state;
     switch (action.type) {
-        case "CHANGE_NAME":
-            tState = {...state, name: action.payload}
-            break;
+        case 'LOAD_LIST':
+            return action.list
         case "CHANGE_AGE":
-            tState = {...state, age: action.payload}
-            break;
+            return {age: action.payload, name: state.name}
         default:
             return state;
     }
-    return tState;
 };
 
 export default siteList;

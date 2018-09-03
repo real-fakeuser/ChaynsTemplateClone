@@ -1,11 +1,11 @@
 import { combineReducers} from 'redux';
-import FORM from './form';
-import SITELIST from './sitelist';
+import form from './form';
+import sitelist from './sitelist';
 
 
 
 const reducers = combineReducers({
-    FORM,SITELIST
+    form,sitelist
 })
 
 
