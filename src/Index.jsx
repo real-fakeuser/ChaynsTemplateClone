@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
+import './reduxLearningExample';
 
 /**
  * The function waits till the chayns api is successfully loaded and

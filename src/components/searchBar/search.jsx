@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input } from 'chayns-components';
 import './search.scss';
+
+
 export default class searchModule extends React.Component {
     constructor(props) {
         super();
@@ -13,6 +15,7 @@ export default class searchModule extends React.Component {
             searchString: ""
         }
         this.timerID = 0;
+
     }
 
     render = () => {
@@ -36,6 +39,7 @@ export default class searchModule extends React.Component {
     }
 
     keyUpSearch = () => {
+
         clearTimeout(this.timerID);
         if (this.state.searchString.length > 0) {
             this.timerID = setTimeout(() => {
@@ -43,5 +47,8 @@ export default class searchModule extends React.Component {
             }, 500);
         }
 
+
     }
+
+    
 }
