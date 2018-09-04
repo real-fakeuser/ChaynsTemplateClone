@@ -1,20 +1,29 @@
 import React from 'react';
 import { Input } from 'chayns-components';
 import './search.scss';
+
+
 export default class searchModule extends React.Component {
     constructor(props) {
-        super();
-        this.props = props;
+        super(props);
 
-        this.state = {
-            formCom: "",
-            searchString: "",
-            lastInputTime: 0,
-            searchString: ""
-        }
         this.timerID = 0;
+
     }
 
+    
+
+    keyUpSearch(value) {
+
+        clearTimeout(this.timerID);
+        if (value.length > 0) {
+            this.timerID = setTimeout(() => {
+                this.props.callback(value);
+            }, 500);
+        }
+
+
+    }
     render = () => {
         return (
             <div className="flex-container">
@@ -22,11 +31,8 @@ export default class searchModule extends React.Component {
                     <Input
                         placeholder="Suche"
                         className="input searchIn"
-                        value={this.state.searchString}
                         onChange={(val) => {
-                            this.setState({ searchString: val }, () => {
-                                this.keyUpSearch()
-                            })
+                            this.keyUpSearch(val);
                         }}
                     />
                     <i className="fa fa-search searchIcon" aria-hidden="true" id="faSearchIcon"></i>
@@ -34,14 +40,5 @@ export default class searchModule extends React.Component {
             </div>
         );
     }
-
-    keyUpSearch = () => {
-        clearTimeout(this.timerID);
-        if (this.state.searchString.length > 0) {
-            this.timerID = setTimeout(() => {
-                this.props.callBack(this.state.searchString);
-            }, 500);
-        }
-
-    }
+    
 }

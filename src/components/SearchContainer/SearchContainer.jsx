@@ -4,47 +4,18 @@ import SearchModule from '../searchBar/Search';
 import getJSONObject from '../../utils/getJson';
 import ListItem from '../ListItem/ListItem';
 import './SearchContainer.scss';
+import ShowMoreBTN from './ShowMoreBTN';
+import { connect } from 'react-redux';
+import { loadList } from '../action/siteList';
 
-export default class SearchContainer extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            listItems: [],
-            shouldClearList: true
-
-        }
-        this.searchString = '';
+class SearchContainer extends React.Component {
+    //TODO propTypes defaultProps
+    constructor(props) {
+        super(props);
+        // this.props.changeName('name');
+        this.searchString = 'test';
         this.listLength = 0;
         this.loadData('Tobit', 0, 10);
-    }
-
-    loadData(key, skip, take) {
-        chayns.showWaitCursor();
-        this.searchString = key;
-        this.listLength = skip;
-        getJSONObject(key, skip, take).then((json) => {
-            if (json.Data != null) {
-                let items = [];
-                if (!this.state.shouldClearList) {
-                    items = this.state.listItems;
-                    this.setState({ shouldClearList: true });
-                }
-
-                for (let i = 0; i < json.Data.length; i++) {
-                    items.push({ siteId: json.Data[i].siteId, locationId: json.Data[i].locationId, appstoreName: json.Data[i].appstoreName })
-                }
-                this.setState({ listItems: items });
-            } else if (skip > 0) {
-                this.setState({ listLength: (this.listLength - skip) });
-                chayns.dialog.alert('Information', 'Es sind keine weiteren Ergebnisse verfügbar')
-                    .then(function (data) { });
-            } else {
-                this.loadData('Tobit', 0, 10);
-
-            }
-            chayns.hideWaitCursor();
-        });
     }
 
     render() {
@@ -54,7 +25,7 @@ export default class SearchContainer extends React.Component {
                 head={'Suchergebnisse'}
                 className='accordion--fixed'
                 right={<SearchModule
-                    callBack={(val) => {
+                    callback={(val) => {
                         this.loadData(val, 0, 10)
                     }}
                 />
@@ -62,7 +33,7 @@ export default class SearchContainer extends React.Component {
             >
                 <div className="accordion__content">
                     {
-                        this.state.listItems && this.state.listItems.map(({ siteId, locationId, appstoreName }) => (
+                        this.props.list && this.props.list.map(({ siteId, locationId, appstoreName }) => (
                             <ListItem
                                 key={siteId}
                                 siteId={siteId}
@@ -73,23 +44,45 @@ export default class SearchContainer extends React.Component {
                     }
                 </div>
                 <div id="right">
-                    <a
-                        id="showMoreBtn"
-                        href="#"
-                        onClick={() => {
-                            this.setState({ shouldClearList: false }, () => {
-                                this.loadData(this.searchString, this.listLength += 10, 10)
-                            })
+                    <ShowMoreBTN
+                        callback={() => {
+                            this.loadData(this.searchString, this.props.list.length, 10)
                         }}
-                    >
-                        Mehr anzeigen
-                            </a>
+                    />
                 </div>
             </Accordion>
         );
     }
 
-}
+    loadData(word, skip, length) {
+        chayns.showWaitCursor();
+        this.searchString = word;
+        //console.log(getJSONObject(word,skip, 10).then((json)=> console.log(json.Data)));
+        getJSONObject(word, skip, length)
+            .then((data) => {
+                console.log(this.props.list.concat(data.Data));
+                console.log(data.Data);
+                if (data.Data.length > 0) {
+                    if (skip != 0) {
+                        this.props.loadNewList(this.props.list.concat(data.Data));
+                    } else {
+                        this.props.loadNewList(data.Data);
+                    }
+                }
+            })
+            .finally(() => chayns.hideWaitCursor());
+    }
+};
 
+const mapStateToProps = (state) => ({
+    // input: state.inputChange.input,
+    list: state.sitelist
+});
 
+const mapDispatchToProps = (dispatch) => ({
+    inputOnChange: (searchString) => dispatch(inputOnchangeAction(searchString)),
+    loadNewList: items => dispatch(loadList(items)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
 
