@@ -7,14 +7,13 @@ import './SearchContainer.scss';
 import ShowMoreBTN from './ShowMoreBTN';
 import { connect } from 'react-redux';
 import { loadList } from '../action/siteList';
-import { addList } from '../action/siteList';
 
 class SearchContainer extends React.Component {
     //TODO propTypes defaultProps
     constructor(props) {
         super(props);
         // this.props.changeName('name');
-        this.searchString = '';
+        this.searchString = 'test';
         this.listLength = 0;
         this.loadData('Tobit', 0, 10);
     }
@@ -47,7 +46,7 @@ class SearchContainer extends React.Component {
                 <div id="right">
                     <ShowMoreBTN
                         callback={() => {
-                            this.loadData('Tobit', this.props.list.length, 10)
+                            this.loadData(this.searchString, this.props.list.length, 10)
                         }}
                     />
                 </div>
@@ -57,14 +56,19 @@ class SearchContainer extends React.Component {
 
     loadData(word, skip, length) {
         chayns.showWaitCursor();
-
+        this.searchString = word;
         //console.log(getJSONObject(word,skip, 10).then((json)=> console.log(json.Data)));
         getJSONObject(word, skip, length)
             .then((data) => {
-                let itemList = data.Data;
-                
-                    this.props.loadNewList(itemList);
-                
+                console.log(this.props.list.concat(data.Data));
+                console.log(data.Data);
+                if (data.Data.length > 0) {
+                    if (skip != 0) {
+                        this.props.loadNewList(this.props.list.concat(data.Data));
+                    } else {
+                        this.props.loadNewList(data.Data);
+                    }
+                }
             })
             .finally(() => chayns.hideWaitCursor());
     }
@@ -78,7 +82,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     inputOnChange: (searchString) => dispatch(inputOnchangeAction(searchString)),
     loadNewList: items => dispatch(loadList(items)),
-    enlargeList: items => dispatch(addList(items))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
